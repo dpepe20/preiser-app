@@ -81,12 +81,12 @@ WSGI_APPLICATION = 'preIser.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'final3',
-        'USER': 'root',
-        'PASSWORD':'1002920130',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd9n9ou8ggn12nd',
+        'USER': 'vyqlviigljuehf',
+        'PASSWORD':'ee902e4b4948a7664d9ce775dd47ff5af4a282c26e2b0a4c3cb2dfa7e5a91ad7',
+        'HOST': 'ec2-54-83-1-94.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
