@@ -1,0 +1,243 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Principal</title>
+    <link rel="icon" type="image/jpg" href="{% static "imagenes/logo_preiser.png" %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/bootstrap/css/bootstrap.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}">
+   
+
+    <!-- Custom fonts for this template-->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/fontawesome-free/css/all.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'font-awesome-4.7.o/css/font-awesome.css'%">
+    
+
+    <!-- Page level plugin CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/datatables/dataTables.bootstrap4.css" %}">
+
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" type="text/css" href="{% static "css/sb-admin.css" %}">
+    <script src="{% static "js/jquery-3.2.1.js" %}"></script>
+    <script src="{% static "js/jquery.formset.js" %}"></script>
+    <script src="{% static "css/prueba.js" %}"></script>
+
+  </head>
+
+    <body >
+
+    <div id="wrapper">
+  
+        <header>
+           
+           <div class="navbar navbar-expand navbar-dark fixed-top">
+           <a href="{% url 'vista_inicio'%}">
+             <img id="Logo" src="{% static "imagenes/Faviconpreiser.png" %}" alt="Logo Preiser" width="130" height="50"> 
+           </a>
+            <div class="container">    
+
+          <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+          
+          </button>
+
+         <div class="menu">
+           <a id="icmenu"><span class="fas fa-bars"></span></a>
+         </div>
+
+          <!-- Navbar -->
+          <ul class="navbar-nav ml-auto ml-md-0" id="botones">
+           
+            
+            <li id="c" class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <div id="admin"><i id="c1" class="fas fa-user-circle fa-fw"><div id="user">{{user.username}}</div></i></div> 
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+               <a  class="dropdown-item" href="{% url 'vista_register' %}"><span id="ay" class="fas fa-user-alt"></span>Encargado</a> 
+                 <a  class="dropdown-item" href="#"><span id="ay" class="fas fa-question-circle"></span>Ayuda</a> 
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"><span id="ay" class="fas fa-sign-out-alt"></span>Cerrar Sesion</a>
+                
+                
+              </div>
+            </li>
+          </ul>
+            </div>
+
+        </div>
+
+        <div id="peque">   
+      <nav >  
+       <ul>
+         <li>
+           <a id="selector" href="{% url 'vista_inicio'%}">
+             <span id="e1" class="fas fa-home"></span>
+              Principal
+             <span></span>
+           </a>
+         </li>
+         <li>
+           <a id="selector" href="{%url 'vista_lista_material' %}">
+             <span id="e1" class="fas fa-box"></span>
+              Materiales y Elementos
+             <span></span>
+           </a>
+         </li>
+         <li>
+           <a id="selector" href="{% url 'lista_prestamo'%}">
+             <span id="e1" class="fas fa-handshake"></span>
+              Prestamos y salidas
+             <span></span>
+           </a>
+         </li>
+          <li class="submenua">
+           <a id="selector" href="#">
+             <span id="e1" class="far fa-chart-bar"></span>Reportes<span id="chevron" class="fas fa-chevron-down"></span></a>
+            <ul class="childrenn">
+               <li>
+                 <a href="{% url 'vista_reporte'%}"><span id="e2" class="fas fa-file-alt"></span>Reporte de Prestamos</a>
+               </li>
+               <li>
+                 <a href="{% url 'vista_materiales_disponibles'%}"><span id="e2" class="fas fa-file-alt"></span>Reporte de Materiales</a>
+               </li>
+             </ul>
+         </li>
+         <li class="submenua">
+           <a id="selector" href="#">
+             <span id="e1" class="fas fa-cogs"></span>Configuracion<span id="chevron" class="fas fa-chevron-down"></span>
+           </a>
+            <ul class="childrenn">
+               <li>
+                 <a href="{%url 'vista_lista_programas' %}"><span id="e2" class="fas fa-desktop"></span>Programa</a>
+               </li>
+               <li>
+                 <a href="{% url 'detalle_ficha' %}"><span id="e2" class="fas fa-file-alt"></span>Ficha</a>
+               </li>
+               <li>
+                 <a href="{% url 'vista_lista_bodega' %}"><span id="e2" class="fas fa-box"></span>Ambiente</a>
+               </li>
+               <li>
+                 <a href="{% url 'lista_cuentadante' %}"><span id="e2" class="fas fa-address-card"></span>Cuentadante</a>
+               </li>
+               <li>
+                 <a href="{% url 'vista_lista_aprendiz' %}"><span id="e2" class="fas fa-user"></span>Aprendiz</a>
+               </li>
+               <li>
+                 <a href="{% url 'nombre_categoria'%}"><span id="e2" class="fas fa-book"></span>Categoria</a>
+               </li>
+               <li>
+                 <a href="{% url 'vista_lista_marca'%}"><span id="e2" class="fas fa-stamp"></span>Marca</a>
+               </li>
+               <li>
+                 <a href="{% url 'vista_lista_nombre_material'%}"><span id="e2" class="fas fa-book"></span>Nombre Material</a>
+               </li>                                                                                          
+             </ul>
+           </li>
+         </ul>
+       </nav>
+     </div>
+
+
+
+      </header>
+
+
+  <div id="content-wrapper" style="margin-top:58px;">
+
+        <div class="container-fluid">
+
+
+          <div class="titulo">
+             <h1>Bienvenidos a Preiser</h1>
+          </div>  
+
+          <div class="ini">
+            <ul>
+              <li>
+                <a href="{%url 'vista_lista_material' %}"><span class="fas fa-box"></span></a>
+                <p>Materiales y Elementos</p>
+              </li>
+              <li>
+                <a href="{% url 'vista_reporte'%}"><span class="far fa-chart-bar"></span></a>
+                <p>Reportes</p>
+              </li>
+              <li>
+                <a href="{% url 'lista_prestamo'%}"><span class="fas fa-handshake"></span></a>
+                <p>Prestamos y Salidas</p>
+              </li>
+
+            </ul>
+          </div>
+
+        <footer class="sticky-footer" style=" background:#EEEEEE;">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>SENA CTPI 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      
+
+    </div>
+
+
+  </div>
+
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Desea salir?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Seleccione "cerrar sesion" si esta seguro de finalizar su sesion actual </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <a class="btn btn-primary" href="{% url 'vista_logout' %}">Cerrar sesion</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- Bootstrap core JavaScript-->
+    <script src="{% static "vendor/jquery/jquery.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static "vendor/jquery-easing/jquery.easing.min.js" %}"></script>
+
+    <!-- Page level plugin JavaScript-->
+    <script src="{% static "vendor/chart.js/Chart.min.js" %}"></script>
+    <script src="{% static "vendor/datatables/jquery.dataTables.js" %}"></script>
+    <script src="{% static "vendor/datatables/dataTables.bootstrap4.js" %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static "js/sb-admin.min.js" %}"></script>
+
+    <!-- Demo scripts for this page-->
+    <script src="{% static "js/demo/datatables-demo.js" %}"></script>
+    <script src="{% static "js/demo/chart-area-demo.js" %}"></script>
+
+  </body>
+
+</html>

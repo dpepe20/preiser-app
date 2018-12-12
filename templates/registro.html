@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block titulo %}
+	Registro
+{% endblock titulo %}
+{% block contenido %}
+<div id="cajota">
+  <div id="centrar">
+	<h4>Registrar Encargado de Bodega</h4>
+	<h3>{{msj}}</h3>
+	<form action="" method="POST">
+		{% csrf_token %}
+		<div class="form-group">
+            <div>
+               <div >
+	               {{formulario.username.errors}}
+	               <div class="form-label-group">
+	                  {{formulario.username}}
+	                  <label for="username">Nombre de Usuario</label>
+	               </div>
+              </div>
+           </div>
+       </div>
+
+       	<div class="form-group">
+            <div>
+               <div >
+	               {{formulario.email.errors}}
+	               <div class="form-label-group">
+	                  {{formulario.email}}
+	                  <label for="email">Correo Electronico</label>
+	               </div>
+              </div>
+           </div>
+       </div>
+
+       <div class="form-group">
+            <div>
+               <div >
+	               {{formulario.password_1.errors}}
+	               <div class="form-label-group">
+	                  {{formulario.password_1}}
+	                  <label for="password">Contraseña</label>
+	               </div>
+              </div>
+           </div>
+       </div>
+
+       <div class="form-group">
+            <div >
+               <div >
+	               {{formulario.password_2.errors}}
+	               <div class="form-label-group">
+	                  {{formulario.password_2}}
+	                  <label for="password2">Confirmar Contraseña</label>
+	               </div>
+              </div>
+           </div>
+       </div>
+		<input class="btn btn-success" type="submit" value="Registrar Encargado">
+	</form>
+</div>
+</div>
+{% endblock contenido %}

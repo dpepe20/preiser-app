@@ -1,0 +1,18 @@
+{%extends "base.html"%}
+{% block titulo %}
+	materiales disponibles
+{% endblock titulo %}
+{% block contenido %}
+	<h4 align="center">REPORTE DE MATERIALES DISPONIBLES   </h4> 
+
+	<h5 style="padding:20px;">reporte de los materiales disponibles que hay en bodega con su respectivo
+	 tipo de elemento, nombre, cantidad, marca, ficha, estado, cuentadante, codigo sena </h5>
+
+	 <button type="submit" class="btn btn-success" style="margin-left:20px;"><a style="color:#fff; font-size:100%;" href="{% url 'vista_reporte_material'%}" class="btn btn-block" id="des">descargar reporte</a></button>
+		
+
+		<br>
+<br>
+	<h4 align="center">REPORTE DE MATERIALES NO  DISPONIBLES   </h4>
+	<button type="submit" class="btn btn-success" style="margin-left:20px;"><a style="color:#fff; font-size:100%;" href="{%url 'vista_reportes'%}" class="btn btn-block" id="des">descargar reporte</a></button>
+{% endblock contenido %}

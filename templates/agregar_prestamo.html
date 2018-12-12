@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% block titulo %}
+ Prestamo
+{% endblock titulo %}
+{% block contenido %}
+<div id="cajota">
+  <div id="centrar">
+      <form action="" method="POST" >
+          
+        {% csrf_token %}
+            <div >
+                  <h3>Agregar Prestamo</h3>
+                  <br>
+                {{formulario|bootstrap}}
+                <div>
+                  <p id="datos1"></p>
+                <p  style="font-size:22px;" id="datos" ></p>
+          
+                </div>
+                
+                {{ formset.management_form }}
+            </div> 
+            <div >
+                    <h5 id="texto">No se permite repetir elementos con mismo codigo sena o serial</h5> 
+                  {% for form in formset %}                
+                        <div class="link-formset">
+                          <fieldset id="f">
+                            {{ form.id }}
+                            <ul>
+                                <div class="row">
+                                  <div  class="col-12">{{form.material|bootstrap}}</div>
+                                  <div class="col-5">{{form.cantidad|bootstrap}}</div>
+                                  <div class="col-2">{{form.DELETE|bootstrap}}</div>                              
+                                </div>                
+                            </ul>
+                            </fieldset>
+                        </div>
+                    
+                  {% endfor %}       
+            </div>
+                    
+        <br>
+        <input type="submit" value="AGREGAR PRESTAMO">
+       
+
+  </form>
+
+  </div>
+</div>
+<script >
+//   $('#busquedProyecto').on('change',inicio1);
+//   function inicio1() {
+//     var id = $(this).val();  
+//     console.log(id+"esot w ")  
+//     $.ajax({
+//       data:{'id':id},
+//       url:'/get1',
+//       type:'get',
+//       success:function(data){
+//         var html=""
+//         for (var i = 0; i < data.length; i++) {
+//           html+='<ul><li>'+data[i].fields.numero_ficha+'</li></ul>'
+
+//         }
+//         $('#datos1').html(html);
+//       }
+
+//     });
+//   }
+
+// // </script>
+
+ <script type="text/javascript">
+ $('#busquedProyecto').keyup(function(e){
+    consulta = $("#busquedProyecto").val();
+    console.log(consulta)
+    $.ajax({
+    data: {'nombre': consulta},
+    url: '/get1/',
+    type: 'get',
+    success : function(data) {
+          var html=""
+          for (var i = 0; i < data.length; i++) {
+            html+='<ul><li>'+data[i].numero_ficha+'</li></ul>'
+
+        }
+
+         $('#datos1').html(html);
+    },
+    error : function(message) {
+            console.log(message);
+         }
+   });
+
+  });
+
+
+    $('#busquedProyecto').keyup(function(e){
+    consulta = $("#busquedProyecto").val();
+    console.log(consulta)
+    $.ajax({
+    data: {'nombre': consulta},
+    url: '/b/',
+    type: 'get',
+    success : function(data) {
+          var html=""
+          for (var i = 0; i < data.length; i++) {
+            html+='<ul><li>'+data[i].nombre+'</li></ul>'
+
+        }
+
+         $('#datos').html(html);
+    },
+    error : function(message) {
+            console.log(message);
+         }
+   });
+
+  });
+
+
+
+</script>
+    <script>
+    $('.link-formset').formset({
+        addText: 'Agregar Elemento',
+        deleteText: 'eliminar'
+    });
+</script>
+  <script >
+    $.datepicker.regional['es']={
+      closeText:'Cerrar',
+      prevText:'Anterior',
+      nextText:'Siguiente',
+      currenText:'Hoy',
+      monthNames:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+      monthNamesShort:['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+      dayNames:['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+      dayNamesShort:['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+      dayNamesMin:['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+      firstDay:1,
+    };
+    $.datepicker.setDefaults($.datepicker.regional['es']);
+    $('.datepicker').datepicker();
+  </script>
+{% endblock contenido %}

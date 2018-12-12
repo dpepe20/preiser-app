@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% block titulo %}
+  Editar Material
+{% endblock titulo %}
+{% block contenido %}
+<div id="cajota">
+  <div id="centrar">
+      <h4>Editar Material</h4>
+      <h5>
+        {{ msj_bod }}
+      </h5>
+      <form action="" method="POST" name="f1" id="f1" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="col-md-12">
+              {{formulario|bootstrap}}
+              {{ bod.management_form }}
+              {% for form in bod %}
+              <div class="link-formset">
+                  {{ form.id }}
+                  <div class="row">
+                    <div class="col-md-4">{{form.bodega|bootstrap}}</div>
+                    <div class="col-md-4">{{form.fecha_ingresa|bootstrap}}</div> 
+                    <div class="col-md-4">{{form.fecha_salida|bootstrap}}</div>     
+                  </div>
+              </div>
+              {% endfor %}
+              <button class="btn btn-guardar" type="submit">Editar material</button>
+          </div>
+      </form>
+  </div>
+</div>
+  <script type="text/javascript">
+  	$(document).ready(function(){
+			$('#id_cantidad').attr('disabled','disabled');
+			$('#id_tipo_elemento').on('change',function(){
+			var selectValor = '#'+$(this).val();
+			if (selectValor=='#Devolutivo') {
+				$('label[for="id_codigo_sena"]').show();
+				$('#id_codigo_sena').show();
+				$('#id_cantidad').attr('disabled','disabled');
+			}
+			else{
+				$('#id_codigo_sena').hide();
+				$('label[for="id_codigo_sena"]').hide();
+				document.f1.id_cantidad.disabled=false;
+        
+			}
+		});
+	});
+  </script>
+  <script >
+    $.datepicker.regional['es']={
+      closeText:'Cerrar',
+      prevText:'Anterior',
+      nextText:'Siguiente',
+      currenText:'Hoy',
+      monthNames:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+      monthNamesShort:['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+      dayNames:['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+      dayNamesShort:['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+      dayNamesMin:['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+      firstDay:1,
+    };
+    $.datepicker.setDefaults($.datepicker.regional['es']);
+    $('.datepicker').datepicker({dateFormat : 'yy-mm-dd'});
+  </script>
+
+{% endblock contenido %}

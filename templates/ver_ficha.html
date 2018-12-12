@@ -1,0 +1,79 @@
+{%extends "base.html"%}
+{% load staticfiles %}
+{%block titulo %}
+Lista de Fichas
+{%endblock%}
+
+{%block contenido %}
+<div class="card mb-3">
+            <div class="card-header">
+              <i class="fas fa-table"></i>
+              Lista de Fichas
+            </div>
+            <div class="card-body">
+              {% if user.is_staff %}
+                <div class="btn_agregar">
+                  <a href="{% url 'agr_ficha'%}" class="btn btn-secondary" id="agregar">Agregar Ficha</a>
+                </div>          
+              {% endif %}
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>numero_ficha</th>
+                      <th>fecha_inicio</th>
+                      <th>fecha_finalizacion</th>
+                      <th>Estado</th>
+                      <th>programa</th>
+                      {% if use.is_staff %}
+                        <th>Acciones</th>
+                      {% endif %}
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>numero_ficha</th>
+                      <th>fecha_inicio</th>
+                      <th>fecha_finalizacion</th>
+                      <th>Estado</th>
+                      <th>programa</th>
+                      {% if user.is_staff %}
+                        <th>Acciones</th>
+                      {% endif %}
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                 	{% for p in lista %}
+                 		<tr>
+                 			<td>{{p.numero_ficha}} </td>
+                 			<td>{{p.fecha_inicio }}</td>
+                 			<td>{{p.fecha_finalizacion}}</td>
+                 			<td>{{p.estado}}</td>
+                 			<td>{{p.programa}}</td>
+                      {% if user.is_staff %}
+                 			  <td>
+                          <a href="{% url 'edit_ficha' id_fic=p.id %}" class="btn btn-sm">
+                            <img src="{% static "imagenes/iconos/pencil-2x.png" %}">
+                          </a>
+
+                          <a href="{% url 'elim_ficha' id_fic=p.id %}" class="btn btn-sm">
+                            <img src="{% static "imagenes/iconos/trash-2x.png" %}">
+                          </a>
+                        </td>
+                      {% endif %}
+                 		</tr>
+                 		{% empty %}
+          						<tr>
+          							<td colspan="4">
+          								No hay Datos Registrados
+          							</td>
+          						</tr>
+                 	{% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer small text-muted"></div>
+    </div>
+{%endblock%}
+
