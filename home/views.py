@@ -361,24 +361,34 @@ def eliminar_prestamo(request,id_prest):
 def devolucion_prestamo(request,id_prest):
 	p =Prestamo.objects.get(id=id_prest)
 	Detalle_PrestamoFormSet = inlineformset_factory(Prestamo,Detalle_Prestamo,extra=0, form=dev_DPrestamoF,can_delete=True)
+	lista = []
 	if request.method=='POST':
 		formulario=dev_prestamoF(request.POST,instance=p)
 		formset=Detalle_PrestamoFormSet(request.POST,instance=p)
-		if formulario.is_valid() and formset.is_valid():					
+		if formulario.is_valid() and formset.is_valid():
 			formulario.save()
-			for instance in formset:	
+			x = ''
+			for instance in formset:
 				i=instance.save(commit=False)
-				if i.estado_elemento_prestamo =='Entregado':
-					i.material.estado = 'Disponible'					
-					i.prestamo.estado='Terminado'   
+				if i.estado_elemento_prestamo == 'En Prestamo':
+					x= 'En Prestamo'
+					lista.append(x)
+				else:
+					x = 'Entregado'
+					lista.append(x)
+					i.material.estado = 'Disponible'
 					i.material.save()
-					i.prestamo.save()			
-				
+
 				if i.estado_devolucion=="malo":
-					i.material.estado='No Disponible'   
+					i.material.estado='No Disponible'
 					i.material.save()
-				i.save()			
-						
+				i.save()
+			a = 'Entregado'
+			b = 'En Prestamo'
+			if a in lista and b not in lista:
+				i.prestamo.estado = 'Terminado'
+				i.prestamo.save()
+
 			return redirect('/Lista/')
 	else:
 		formulario=dev_prestamoF(instance=p)
