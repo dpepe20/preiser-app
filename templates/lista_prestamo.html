@@ -48,18 +48,27 @@
 			                    <td>{{p.aprendiz}}</td>
 			                    <td>{{p.fecha_entrega}}</td>
 			                    <td>
-                            <a href="{% url 'editar_prestamo' id_prest=p.id %}" class="btn btn-sm">
-                              <img src="{% static "imagenes/iconos/pencil-2x.png" %}">
-                            <a>
+                           {% ifequal p.estado 'Terminado'  %}
+                               <a href="{% url 'editar_prestamo' id_prest=p.id %}" class="btn btn-sm" onclick="return false" style="background: #F7EDEB;">
+                                 <img src="{% static "imagenes/iconos/pencil-2x.png" %}">
+                               <a>
 
-                            <a href="{% url 'devolucion_prestamo' id_prest=p.id %}" class="btn btn-sm">
-                              <i class="fas fa-undo-alt"></i>
-                            <a> 
-                            
-                            <a  class="btn btn-sm" href="{% url 'eliminar_prestamo' id_prest=p.id %}">
-                             <img src="{% static "imagenes/iconos/trash-2x.png" %}">
-                             </a>
-                            
+                              <a href="{% url 'devolucion_prestamo' id_prest=p.id %}" class="btn btn-sm" onclick="return false"  style="background: #F7EDEB;">
+                                <i class="fas fa-undo-alt"></i>
+                              <a>
+                            {% else %}
+                              <a href="{% url 'editar_prestamo' id_prest=p.id %}" class="btn btn-sm">
+                                <img src="{% static "imagenes/iconos/pencil-2x.png" %}">
+                              <a>
+
+                              <a href="{% url 'devolucion_prestamo' id_prest=p.id %}" class="btn btn-sm">
+                                <i class="fas fa-undo-alt"></i>
+                              <a>
+                            {% endifequal %}
+
+                             <a href="{% url 'eliminar_prestamo' id_prest=p.id %}">
+                               <i class="fa fa-trash"></i>
+                              </a>  
                               
 
                           </td>
